@@ -29,13 +29,12 @@ var cfgFile string
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "kif",
-	Short: "A brief description of your application",
-	Long: `A longer description that spans multiple lines and likely contains
-examples and usage of using your application. For example:
+	Short: "Kif helps you to manage information between Wrike and Gitlab",
+	Long: `Copy a Wrike task to gitlab project issue. For example:
+kif cp $WRIKE_PERMALINK $GITLAB_PROJECT_ID
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+Kif is a CLI tool written in Go.
+Complete documentation is available at github.com/pierreboissinot/kif`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	//	Run: func(cmd *cobra.Command, args []string) { },
