@@ -30,8 +30,8 @@ var cfgFile string
 var rootCmd = &cobra.Command{
 	Use:   "kif",
 	Short: "Kif helps you to manage information between Wrike and Gitlab",
-	Long: `Copy a Wrike task to gitlab project issue. For example:
-kif cp $WRIKE_PERMALINK $GITLAB_PROJECT_ID
+	Long: `Init gitlab issue from a Wrike task. For example:
+kif o --from $WRIKE_PERMALINK
 
 Kif is a CLI tool written in Go.
 Complete documentation is available at github.com/pierreboissinot/kif`,
