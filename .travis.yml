@@ -14,7 +14,7 @@ env:
 install:
 # needed for the snap pipe:
 - sudo snap install snapcraft --classic
-- go get -v ./...
+- go get ./...
 - go build
 # needed for --release-notes flag
 - go get -u github.com/git-chglog/git-chglog/cmd/git-chglog
