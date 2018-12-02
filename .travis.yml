@@ -37,7 +37,7 @@ after_success:
 deploy:
 - provider: script
   skip_cleanup: true
-  script: git-chglog --output CHANGELOG.md $(git describe --tags $(git rev-list --tags --max-count=1)) && curl -sL https://git.io/goreleaser | bash -s -- --debug --release-notes=CHANGELOG.md
+  script: git-chglog --output ./../CHANGELOG.md $(git describe --tags $(git rev-list --tags --max-count=1)) && curl -sL https://git.io/goreleaser | bash -s -- --debug --release-notes=./..CHANGELOG.md
   # The above is a command to generate CHANGELOG with the commit included in the latest tag.
   on:
     tags: true
