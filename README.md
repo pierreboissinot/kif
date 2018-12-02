@@ -13,6 +13,10 @@ kif import https://www.wrike.com/open.htm\?id\=83740872A
 
 [See releases page](https://github.com/pierreboissinot/kif/releases)
 
+### deb/rpm
+
+Download the .deb or .rpm from the releases page and install with `dpkg -i` and `rpm -i` respectively.
+
 ### Snap [WIP]
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/kif)
 
