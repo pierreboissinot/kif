@@ -1,5 +1,7 @@
 # Kif
 
+[![Build Status](https://travis-ci.org/pierreboissinot/kif.svg?branch=master)](https://travis-ci.org/pierreboissinot/kif)
+
 ## Usage
 ### Import a Wrike task into Gitlab issue
 ```
