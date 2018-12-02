@@ -21,12 +21,12 @@ snapshot:
   name_template: "{{ .Tag }}-next"
 snapcraft:
   summary: CLI helps you to manage information between Wrike and Gitlab
-  publish: true
+  publish: false
   description: |
     Open gitlab issue from Wrike task, example:
     kif import $WRIKE_PERMALINK
-  confinement: classic
-  grade: devel
+  # confinement: stable
+  # grade: devel
   apps:
     kif:
       plugs: ["home", "network"]
