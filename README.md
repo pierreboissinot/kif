@@ -13,7 +13,7 @@ kif import https://www.wrike.com/open.htm\?id\=83740872A
 
 [See releases page](https://github.com/pierreboissinot/kif/releases)
 
-### Snap
+### Snap [WIP]
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/kif)
 
 `snap install kif`
