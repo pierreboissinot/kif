@@ -7,6 +7,22 @@ kif import https://www.wrike.com/open.htm\?id\=83740872A
 ```
 [demo](https://asciinema.org/a/7j5KmkLIGYPK0Kp4CmgVhndKm)
 
+## Install
+
+### Snap
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/kif)
+
+`snap install kif`
+
+### Build from source
+
+```
+git clone git@github.com:pierreboissinot/kif.git
+cd kif
+go get -v ./...
+go build
+```
+
 ## Configuration
 Add `~/.kif.toml` like:
 ```toml
