@@ -30,6 +30,20 @@ snapcraft:
   apps:
     kif:
       plugs: ["home", "network"]
+nfpm:
+  name_template: '{{ .ProjectName }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
+  maintainer: Pierre Boissinot <perso@pierreboissinot.me>
+  description: CLI helps you to manage information between Wrike and Gitlab.
+  license: GNU General Public License v3.0
+  # Formats to be generated.
+  formats:
+    - deb
+    - rpm
+  # Packages your package depends on.
+  dependencies:
+    - git
+  # Override default /usr/local/bin destination for binaries
+  bindir: /usr/bin
 changelog:
   sort: asc
   filters:
