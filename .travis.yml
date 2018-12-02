@@ -15,8 +15,6 @@ env:
 install:
 # needed for the snap pipe:
 - sudo snap install snapcraft --classic
-- go get -d -v ./...
-- go install -v ./...
 - go build
 
 # needed for the docker pipe
