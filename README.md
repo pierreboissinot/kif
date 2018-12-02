@@ -28,3 +28,7 @@ infos or split a Wrike task into multiple issues.
 
 - [issues-helper](https://www.clever-cloud.com/blog/features/2018/02/13/issues-helper/)
 - [cobra](https://github.com/spf13/cobra)
+
+<p align="center">
+  <img alt="Hail" src="media/kif-hail.gif">
+</p>
