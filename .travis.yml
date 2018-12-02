@@ -16,6 +16,8 @@ install:
 - sudo snap install snapcraft --classic
 - go get -v ./...
 - go build
+# needed for --release-notes flag
+- go get -u github.com/git-chglog/git-chglog/cmd/git-chglog
 
 # needed for the docker pipe
 services:
@@ -35,7 +37,7 @@ after_success:
 deploy:
 - provider: script
   skip_cleanup: true
-  script: curl -sL https://git.io/goreleaser | bash
+  script: curl -sL https://git.io/goreleaser | bash --release-notes < git-chglog
   on:
     tags: true
     condition: "$TRAVIS_OS_NAME = linux"
