@@ -27,7 +27,7 @@ snapcraft:
     kif import $WRIKE_PERMALINK
   apps:
     kif:
-      plugs: ["home", "network"]
+      plugs: ["home", "network", "git"]
 changelog:
   sort: asc
   filters:
