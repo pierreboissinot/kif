@@ -18,10 +18,10 @@ package cmd
 import (
 	"bytes"
 	"fmt"
+	"github.com/pierreboissinot/go-wrike"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"github.com/xanzy/go-gitlab"
-	"go-wrike"
 	"log"
 	"os/exec"
 	"regexp"
