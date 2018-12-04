@@ -25,8 +25,8 @@ snapcraft:
   description: |
     Open gitlab issue from Wrike task, example:
     kif import $WRIKE_PERMALINK
-  # confinement: stable
-  # grade: devel
+  confinement: devmode
+  grade: devel
   apps:
     kif:
       plugs: ["home", "network"]
