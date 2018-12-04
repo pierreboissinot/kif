@@ -16,14 +16,13 @@
 package cmd
 
 import (
-	"bytes"
 	"fmt"
 	"github.com/pierreboissinot/go-wrike"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	"github.com/xanzy/go-gitlab"
+	"gopkg.in/src-d/go-git.v4"
 	"log"
-	"os/exec"
 	"regexp"
 	"strings"
 )
@@ -52,15 +51,19 @@ var importCmd = &cobra.Command{
 			fmt.Errorf("More than 1 task returned: %v", len(tasks.Data))
 		}
 		task := tasks.Data[0]
-		cmdName := "git"
-		cmdArgs := []string{"remote", "get-url", "origin"}
-		gitCmd := exec.Command(cmdName, cmdArgs...)
-		var out bytes.Buffer
-		gitCmd.Stdout = &out
-		gitErr := gitCmd.Run()
-		if gitErr != nil {
-			log.Fatal(gitErr)
+		path := "./"
+		r, err := git.PlainOpen(path)
+		if err != nil {
+			fmt.Errorf("Can't open repository from path: %v", path)
 		}
+		remoteOrigin, err := r.Remote("origin")
+		if err != nil {
+			fmt.Errorf("No remote with name: %v", "origin")
+		}
+		if len(remoteOrigin.Config().URLs) < 1 {
+			log.Fatal("No url associated with remote origin")
+		}
+		remoteUrl := remoteOrigin.Config().URLs[0]
 		re := regexp.MustCompile(`(?:git|ssh|https?|git@[-\w.]+):(?P<Pid>(\/\/)?(.*?))(\.git)(\/?|\#[-\d\w._]+?)`)
 		/*
 			fmt.Printf("%#v\n", re.FindStringSubmatch(out.String()))
@@ -68,7 +71,7 @@ var importCmd = &cobra.Command{
 			fmt.Println(re.SubexpNames()[1])
 		*/
 		format := fmt.Sprintf("${%s}", re.SubexpNames()[1])
-		pid := strings.TrimSuffix(re.ReplaceAllString(out.String(), format), "\n")
+		pid := strings.TrimSuffix(re.ReplaceAllString(remoteUrl, format), "\n")
 		gitlabClient := gitlab.NewClient(nil, viper.GetString("gitlabApiToken"))
 		i := &gitlab.CreateIssueOptions{Title: gitlab.String(task.Title), Description: gitlab.String(task.Description)}
 		issue, _, err := gitlabClient.Issues.CreateIssue(pid, i)
