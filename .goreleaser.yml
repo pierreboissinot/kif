@@ -21,7 +21,7 @@ snapshot:
   name_template: "{{ .Tag }}-next"
 snapcraft:
   summary: CLI helps you to manage information between Wrike and Gitlab
-  publish: false
+  publish: true
   description: |
     Open gitlab issue from Wrike task, example:
     kif import $WRIKE_PERMALINK
@@ -39,9 +39,6 @@ nfpm:
   formats:
     - deb
     - rpm
-  # Packages your package depends on.
-  dependencies:
-    - git
   # Override default /usr/local/bin destination for binaries
   bindir: /usr/bin
 changelog:
