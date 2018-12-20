@@ -15,7 +15,7 @@
 
 package main
 
-import "github.com/pierreboissinot/kif/cmd"
+import "kif/cmd"
 
 func main() {
 	cmd.Execute()
