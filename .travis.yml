@@ -12,7 +12,7 @@ env:
 # needed for the snap pipe:
 - PATH=/snap/bin:$PATH
 install:
-- go get ./...
+- go mod download
 - go build
 # needed for --release-notes flag
 - go get -u github.com/git-chglog/git-chglog/cmd/git-chglog
