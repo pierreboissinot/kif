@@ -18,7 +18,7 @@ install:
 # needed for --release-notes flag
 - curl -s https://api.github.com/repos/git-chglog/git-chglog/releases/latest | grep "browser_download_url.*git-chglog_linux_amd64" | cut -d ":" -f 2,3 | tr -d \" | wget -qi -
 - chmod +x git-chglog_linux_amd64
-- mv git-chglog_linux_amd64 /usr/local/bin
+- sudo mv git-chglog_linux_amd64 /usr/local/bin
 # needed for the docker pipe
 services:
 - docker
