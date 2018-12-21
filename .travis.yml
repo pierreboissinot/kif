@@ -12,8 +12,6 @@ env:
 # needed for the snap pipe:
 - PATH=/snap/bin:$PATH
 install:
-# needed for the snap pipe:
-- sudo snap install snapcraft --classic
 - go get ./...
 - go build
 # needed for --release-notes flag
@@ -42,6 +40,10 @@ deploy:
   on:
     tags: true
     condition: "$TRAVIS_OS_NAME = linux"
-before_install:
+    branch: master
+snap_install:
+  # needed for the snap pipe:
+- sudo snap install snapcraft --classic
+before_snap_install:
 - openssl aes-256-cbc -K $encrypted_1c4d13274fff_key -iv $encrypted_1c4d13274fff_iv
   -in snap.login.enc -out snap.login -d
