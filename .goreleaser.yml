@@ -19,28 +19,6 @@ checksum:
   name_template: 'checksums.txt'
 snapshot:
   name_template: "{{ .Tag }}-next"
-snapcraft:
-  summary: CLI helps you to manage information between Wrike and Gitlab
-  publish: true
-  description: |
-    Open gitlab issue from Wrike task, example:
-    kif import $WRIKE_PERMALINK
-  confinement: classic
-  grade: devel
-  apps:
-    kif:
-      plugs: ["home", "network"]
-nfpm:
-  name_template: '{{ .ProjectName }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
-  maintainer: Pierre Boissinot <perso@pierreboissinot.me>
-  description: CLI helps you to manage information between Wrike and Gitlab.
-  license: GNU General Public License v3.0
-  # Formats to be generated.
-  formats:
-    - deb
-    - rpm
-  # Override default /usr/local/bin destination for binaries
-  bindir: /usr/bin
 changelog:
   sort: asc
   filters:
