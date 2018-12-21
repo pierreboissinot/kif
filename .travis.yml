@@ -11,6 +11,7 @@ addons:
 env:
 # needed for the snap pipe:
 - PATH=/snap/bin:$PATH
+- GO111MODULE=on # Force-enable Go modules. This will be unnecessary when Go 1.12 lands.
 install:
 - go mod download
 - go build
