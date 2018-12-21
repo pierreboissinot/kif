@@ -1,50 +1,38 @@
 language: go
 go:
-  - "1.11.x"
+- 1.11.x
 addons:
   apt:
     packages:
-    # needed for the nfpm pipe:
     - rpm
-    # needed for the snap pipe:
     - snapd
-
 env:
-# needed for the snap pipe:
-- PATH=/snap/bin:$PATH GO111MODULE=on # Force-enable Go modules. This will be unnecessary when Go 1.12 lands.
+  matrix:
+  - PATH=/snap/bin:$PATH GO111MODULE=on
+  global:
+    secure: iS3G0f3dAnZ2zk3avZf6CEbX0dC/McVlBAMcXCxhVpm1RpvoG8AAAQj2aWm/Oc4mjtblkgaYIqINFIaSMNjVyQH9GDD+ON3LHDPcuX6hcjJnTDYlFRXfbiVT+cU8y50Y5BlhcNZJchVPnQYecogyBtQGBksQLeEzVsGs8VwNTPlCQLpRMqPjuxaBocwP5jruI55jHZrHg7NsI4sWaG8dBxAUo7jpx+m5XefU4XnIRAC7d+F78/LPcmMXsQzor7zlPoMJNF2lHbOV17y3X+PcEIlDnAOAbQsOHEZ3YwZLFxRUULuN+w8yezWLXAfKOjutmTUen1WEU4uu1qm5bSQnqS30hUjYLb7Vuw+pb+ZUMeIqeMYO8X2awSBzas4bvcxTz1m5uZvPAjdQxR7ioIWQCcpUJYs/GECFclk9VAWUkAQ0w56qC1s4YyuiPrikVElk9WUZ+aGjLa9zh4uNKNEAyc5X99trLOu4kESEaTD/uhPpz2wMiQuiKoKJ6tZ/Q2YhgtTeWTbL0x2xKsGifqhbzyLcGXZmIHi07M1FtVNySmnFAF3jPBJjbObYV+m+qJpP4asolquHTTJB0y4YrhiXnPEqzNLH0tE0+xlMX6UcwpUV2kroWDgZI/OCmFUCMdrTj8WoUOkBGKPylmQvM6RIsuLDfRdaM6QNij3UtmtU2KM=
 install:
-#- go mod download
 - go build
-# needed for --release-notes flag
-- curl -s https://api.github.com/repos/git-chglog/git-chglog/releases/latest | grep "browser_download_url.*git-chglog_linux_amd64" | cut -d ":" -f 2,3 | tr -d \" | wget -qi -
+- curl -s https://api.github.com/repos/git-chglog/git-chglog/releases/latest | grep
+  "browser_download_url.*git-chglog_linux_amd64" | cut -d ":" -f 2,3 | tr -d \" |
+  wget -qi -
 - chmod +x git-chglog_linux_amd64
 - sudo mv git-chglog_linux_amd64 /usr/local/bin/git-chglog
-# needed for the docker pipe
 services:
 - docker
 after_success:
-# docker login is required if you want to push docker images.
-# DOCKER_PASSWORD should be a secret in your .travis.yml configuration.
-#- test -n "$TRAVIS_TAG" && docker login -u=myuser -p="$DOCKER_PASSWORD"
-# snapcraft login is required if you want to push snapcraft packages to the
-# store.
-# You'll need to run `snapcraft export-login snap.login` and
-# `travis encrypt-file snap.login --add` to add the key to the travis
-# environment.
 - test -n "$TRAVIS_TAG" && snapcraft login --with snap.login
-
-# calls goreleaser
 deploy:
 - provider: script
   skip_cleanup: true
-  script: git-chglog --output ./../CHANGELOG.md $(git describe --tags $(git rev-list --tags --max-count=1)) && curl -sL https://git.io/goreleaser | bash -s -- --debug --release-notes=./../CHANGELOG.md
-  # The above is a command to generate CHANGELOG with the commit included in the latest tag.
+  script: git-chglog --output ./../CHANGELOG.md $(git describe --tags $(git rev-list
+    --tags --max-count=1)) && curl -sL https://git.io/goreleaser | bash -s -- --debug
+    --release-notes=./../CHANGELOG.md
   on:
     tags: true
     condition: "$TRAVIS_OS_NAME = linux"
     branch: master
 snap_install:
-  # needed for the snap pipe:
 - sudo snap install snapcraft --classic
 before_snap_install:
 - openssl aes-256-cbc -K $encrypted_1c4d13274fff_key -iv $encrypted_1c4d13274fff_iv
