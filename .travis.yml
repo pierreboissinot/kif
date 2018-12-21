@@ -13,7 +13,7 @@ env:
 # needed for the snap pipe:
 - PATH=/snap/bin:$PATH GO111MODULE=on # Force-enable Go modules. This will be unnecessary when Go 1.12 lands.
 install:
-- go mod download
+#- go mod download
 - go build
 # needed for --release-notes flag
 - go get -u github.com/git-chglog/git-chglog/cmd/git-chglog
