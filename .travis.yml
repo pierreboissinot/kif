@@ -1,17 +1,9 @@
 language: go
 go:
   - "1.11.x"
-addons:
-  apt:
-    packages:
-    # needed for the nfpm pipe:
-    - rpm
-    # needed for the snap pipe:
-    - snapd
 
 env:
-# needed for the snap pipe:
-- PATH=/snap/bin:$PATH GO111MODULE=on # Force-enable Go modules. This will be unnecessary when Go 1.12 lands.
+- GO111MODULE=on # Force-enable Go modules. This will be unnecessary when Go 1.12 lands.
 install:
 #- go mod download
 - go build
@@ -26,12 +18,6 @@ after_success:
 # docker login is required if you want to push docker images.
 # DOCKER_PASSWORD should be a secret in your .travis.yml configuration.
 #- test -n "$TRAVIS_TAG" && docker login -u=myuser -p="$DOCKER_PASSWORD"
-# snapcraft login is required if you want to push snapcraft packages to the
-# store.
-# You'll need to run `snapcraft export-login snap.login` and
-# `travis encrypt-file snap.login --add` to add the key to the travis
-# environment.
-- test -n "$TRAVIS_TAG" && snapcraft login --with snap.login
 
 # calls goreleaser
 deploy:
@@ -43,9 +29,3 @@ deploy:
     tags: true
     condition: "$TRAVIS_OS_NAME = linux"
     branch: master
-snap_install:
-  # needed for the snap pipe:
-- sudo snap install snapcraft --classic
-before_snap_install:
-- openssl aes-256-cbc -K $encrypted_1c4d13274fff_key -iv $encrypted_1c4d13274fff_iv
-  -in snap.login.enc -out snap.login -d
