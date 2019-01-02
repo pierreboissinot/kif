@@ -39,7 +39,7 @@ var importCmd = &cobra.Command{
 	Args: cobra.ExactArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
 		permalink := args[0]
-		wrikeApiToken := viper.GetString("wrikeApiToken")
+		wrikeApiToken := viper.GetString("WrikeApiToken")
 		wrikeClient := wrike.NewClient(nil, wrikeApiToken)
 		fields := "[\"description\"]"
 		tasks, _, err := wrikeClient.Tasks.QueryTasks(wrike.QueryTasksOptions{permalink, fields})
@@ -72,7 +72,7 @@ var importCmd = &cobra.Command{
 		*/
 		format := fmt.Sprintf("${%s}", re.SubexpNames()[1])
 		pid := strings.TrimSuffix(re.ReplaceAllString(remoteUrl, format), "\n")
-		gitlabClient := gitlab.NewClient(nil, viper.GetString("gitlabApiToken"))
+		gitlabClient := gitlab.NewClient(nil, viper.GetString("GitlabApiToken"))
 		i := &gitlab.CreateIssueOptions{Title: gitlab.String(task.Title), Description: gitlab.String(task.Description)}
 		issue, _, err := gitlabClient.Issues.CreateIssue(pid, i)
 		if err != nil {
